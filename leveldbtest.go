@@ -405,14 +405,14 @@ func main() {
 				fmt.Printf("usage: open <id>\n")
 				continue
 			}
-db, err := NewTest(cmd[1], false, true, 200000000, 256)
-if err != nil {
-	fmt.Printf("could not create a new open test %v: %#v\n", cmd[1], err)
-	if errno, ok := err.(syscall.Errno); ok && uint32(errno) == 0x20 {
-		fmt.Printf("GOT IT\n")
-	}
-	continue
-}
+			db, err := NewTest(cmd[1], false, true, 200000000, 256)
+			if err != nil {
+				fmt.Printf("could not create a new open test %v: %#v\n", cmd[1], err)
+				if errno, ok := err.(syscall.Errno); ok && uint32(errno) == 0x20 {
+					fmt.Printf("GOT IT\n")
+				}
+				continue
+			}
 			tests[cmd[1]] = db
 			fmt.Printf("created open test %v\n", db.postfix)
 			db.Start()
